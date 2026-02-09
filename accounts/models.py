@@ -19,15 +19,11 @@ class Degree(models.IntegerChoices):
     doc = 4,"PHD"
 
 
-
-
-
 class Skills(models.Model):
     title = models.CharField(max_length=50)
     related = models.CharField(choices=CategoryChoices.choices)
     experience = models.IntegerField()
     
-
 
 class EmployeeProfile(models.Model):
     pic = models.ImageField()
@@ -42,8 +38,6 @@ class EmployeeProfile(models.Model):
     rejected = models.PositiveIntegerField(default=0)
     
     
-
-
 class Positions(models.Model):
 
     def upload_position_img(instance,filename):
@@ -76,16 +70,13 @@ class EmployerProfile(models.Model):
     email = models.EmailField()
 
 
-
-
 class Employer(models.Model):
     emplyr_pro = models.OneToOneField(EmployerProfile,on_delete=models.CASCADE)
     offered = models.CharField(max_length=50)
+    emplr_acc = models.CharField(max_length=50)
+    emplr_rjct = models.CharField(max_length=50)
     
 
-
-
-#should be checked
 class Application(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     position = models.ForeignKey(Positions, on_delete=models.CASCADE)

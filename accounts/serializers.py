@@ -26,7 +26,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
 class EmployerProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Employer
+        model = models.EmployerProfile
         fields = ['pic','name','field','bio','company']
 
 class EmployerSerialaizer(serializers.ModelSerializer):
@@ -39,3 +39,5 @@ class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Application
         fields =['employee','position','applied_at','status']        
+
+               

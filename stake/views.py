@@ -1,4 +1,5 @@
 
+from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -15,7 +16,8 @@ class JobsList(APIView):
         serializer = PositionSerializer(data = request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response('ok')
+        return Response(serializer.data)
 
+    
 
 

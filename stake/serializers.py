@@ -1,14 +1,14 @@
 from rest_framework import serializers
-from . import models
+from models import Positions,Application
 
 
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Application
+        model = Application
         fields =['employee','position','applied_at','status']        
 
 class PositionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Positions
+        model = Positions
         fields = ['img','title','category','needed_workforce','remained']
                

@@ -1,6 +1,6 @@
 from django.db import models
 from accounts.models import Employee
-from user.models import CategoryChoices
+from accounts.models import CategoryChoices
 
 
 class ApplicationStatus(models.IntegerChoices):

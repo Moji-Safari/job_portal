@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from stake.models import Application,Positions
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
@@ -22,9 +23,6 @@ class User(AbstractUser):
    
 
 
-
-
-
 class CategoryChoices(models.TextChoices):
     HEALTH="health","Health"
     TECH="tech","Tech"
@@ -38,24 +36,6 @@ class Degree(models.IntegerChoices):
     bach = 2, "Bachelore"
     mast = 3, "Master"
     doc = 4,"PHD"
-
-
-
-class Employee(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    profile = models.OneToOneField(EmployeeProfile,on_delete=models.CASCADE,related_name='profile')
-    is_verified = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    #jobs = models.ManyToManyField(Positions,)
-
-
-
-class Employer(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    emplyr_pro = models.OneToOneField(EmployerProfile,on_delete=models.CASCADE)
-    offered = models.CharField(max_length=50)
-    emplr_acc = models.CharField(max_length=50)
-    emplr_rjct = models.CharField(max_length=50)
 
 class Skills(models.Model):
     title = models.CharField(max_length=50)
@@ -87,4 +67,23 @@ class EmployerProfile(models.Model):
     email = models.EmailField()
 
     
+
+
+class Employee(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    profile = models.OneToOneField(EmployeeProfile,on_delete=models.CASCADE,related_name='profile')
+    is_verified = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    #jobs = models.ManyToManyField(Positions,)
+
+
+
+class Employer(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    emplyr_pro = models.OneToOneField(EmployerProfile,on_delete=models.CASCADE)
+    offered = models.ForeignKey(Positions,on_delete=models.CASCADE,related_name='offered')
+    emplr_acc = models.ForeignKey(Application,on_delete=models.CASCADE,related_name='accepted')
+    emplr_rjct = models.ForeignKey(Application,on_delete=models.CASCADE,related_name='rejected')
+
+
 

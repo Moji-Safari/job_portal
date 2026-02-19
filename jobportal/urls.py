@@ -19,10 +19,13 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-
+from accounts.views import RegisterView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/register/', RegisterView.as_view()),
+    path('api/login/', TokenObtainPairView.as_view()),
+    path('api/token/refresh/', TokenRefreshView.as_view()),
 ]
 if settings.DEBUG:
     urlpatterns += static(
